@@ -71,7 +71,30 @@ const ll N = 1e4 + 9;
 
 void init() {}
 
-void elmtarshm(int tc) {}
+void elmtarshm(int tc) {
+  int n, m;
+  cin >> n >> m;
+  vector<int> a(n), b(m);
+  cin >> a >> b;
+  int x = 0;
+  for (int i : a) x ^= i;
+  if (n % 2 == 0) {
+    int temp = 0;
+    for (int i : b) temp |= i;
+    int mn = 0;
+    for (int i : a) {
+      mn ^= (i | temp);
+    }
+    cout << mn << space << x << endl;
+  } else {
+    int mn = x;
+    for (int I : b) {
+      mn = min(mn, mn | I);
+      x = max(x, x | I);
+    }
+    cout << mn << space << x << endl;
+  }
+}
 
 int32_t main() {
   // fast input
@@ -80,7 +103,7 @@ int32_t main() {
   fileInput();
   init();
   int t = 1;
-  //    cin >> t;
+  cin >> t;
   int tc = 1;
   while (t--) {
     elmtarshm(tc++);

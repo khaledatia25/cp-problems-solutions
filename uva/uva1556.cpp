@@ -39,7 +39,6 @@ using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
                               tree_order_statistics_node_update>;
 template <class T>
 using min_heap = priority_queue<T, vector<T>, greater<T>>;
-
 template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
@@ -53,7 +52,6 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
   os << '\n';
   return os;
 }
-
 using ld = long double;
 
 void fileInput(/*Hello World*/);
@@ -69,9 +67,50 @@ const int sz = 1e6;
 const int K = +9;
 const ll N = 1e4 + 9;
 
+struct noname {
+  map<string, noname *> next;
+  noname() {}
+
+  void add(string &s, int st = 0) {
+    string temp;
+    for (int i = st; i < s.size(); i++) {
+      if (s[i] == '\\') {
+        // cout << temp << endl;
+        if (next[temp] == nullptr) next[temp] = new noname();
+        next[temp]->add(s, i + 1);
+        return;
+      }
+      temp.push_back(s[i]);
+    }
+    if (next[temp] == nullptr) next[temp] = new noname();
+  }
+  void print(int sp = 0) {
+    for (auto I : next) {
+      // if (I.second == nullptr) continue;
+      cout << string(sp, ' ') << I.first;
+      cout << endl;
+      I.second->print(sp + 1);
+    }
+  }
+};
+
 void init() {}
 
-void elmtarshm(int tc) {}
+void elmtarshm(int tc) {
+  int n;
+  while (cin >> n) {
+    noname t;
+
+    for (int i = 0; i < n; i++) {
+      string s;
+      cin >> s;
+      // cout << s << endl;
+      t.add(s);
+    }
+    t.print();
+    cout << endl;
+  }
+}
 
 int32_t main() {
   // fast input

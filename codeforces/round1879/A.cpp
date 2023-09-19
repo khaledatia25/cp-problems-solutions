@@ -71,7 +71,23 @@ const ll N = 1e4 + 9;
 
 void init() {}
 
-void elmtarshm(int tc) {}
+void elmtarshm(int tc) {
+  int n, x, k;
+  cin >> n >> k >> x;
+  int ans = 0;
+  bool a = true;
+  if (n < k) a = false;
+  if (x + 1 < k) a = false;
+  int cnt = 0;
+  for (int i = 0; i < k; i++) {
+    ans += i;
+  }
+  if (x == k) x--;
+  for (int i = k; i < n; i++) {
+    ans += x;
+  }
+  cout << (a ? ans : -1) << endl;
+}
 
 int32_t main() {
   // fast input
@@ -80,7 +96,7 @@ int32_t main() {
   fileInput();
   init();
   int t = 1;
-  //    cin >> t;
+  cin >> t;
   int tc = 1;
   while (t--) {
     elmtarshm(tc++);

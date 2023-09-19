@@ -39,7 +39,6 @@ using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
                               tree_order_statistics_node_update>;
 template <class T>
 using min_heap = priority_queue<T, vector<T>, greater<T>>;
-
 template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
@@ -53,7 +52,6 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
   os << '\n';
   return os;
 }
-
 using ld = long double;
 
 void fileInput(/*Hello World*/);
@@ -67,11 +65,57 @@ const ll mod = 1e9 + 7;
 // const ll mod = 998244353;
 const int sz = 1e6;
 const int K = +9;
-const ll N = 1e4 + 9;
+const ll N = 2e5 + 9;
+int dp[N], a[N], sum[N];
+vector<int> g[N];
 
+void dfs(int node, int par) {
+  sum[node] = a[node];
+  dp[node] = -1e15;
+  for (int nxt : g[node]) {
+    if (nxt == par) continue;
+    dfs(nxt, node);
+    sum[node] += sum[nxt];
+    dp[node] = max(dp[node], dp[nxt]);
+  }
+  dp[node] = max(dp[node], sum[node]);
+}
+bool can = true;
+int get(int node, int par) {
+  int ret = -1e15;
+  vector<int> v;
+  for (int nxt : g[node]) {
+    if (nxt == par) continue;
+    ret = max(ret, get(nxt, node));
+    v.push_back(dp[nxt]);
+  }
+  if (v.size() < 2) {
+    ret = max(ret, (int)-1e15);
+  } else {
+    sort(allr(v));
+    ret = max(ret, v[0] + v[1]);
+  }
+  return ret;
+}
 void init() {}
 
-void elmtarshm(int tc) {}
+void elmtarshm(int tc) {
+  int n;
+  cin >> n;
+  for (int i = 1; i <= n; i++) {
+    cin >> a[i];
+  }
+  for (int i = 1; i < n; i++) {
+    int u, v;
+    cin >> u >> v;
+    g[u].push_back(v);
+    g[v].push_back(u);
+  }
+  dfs(1, 1);
+  int ans = get(1, 1);
+  can = ans > -1e15;
+  cout << (can ? to_string(ans) : "Impossible") << endl;
+}
 
 int32_t main() {
   // fast input

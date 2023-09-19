@@ -71,7 +71,23 @@ const ll N = 1e4 + 9;
 
 void init() {}
 
-void elmtarshm(int tc) {}
+void elmtarshm(int tc) {
+  int n;
+  cin >> n;
+  vector<pair<int, int>> v(n);
+  vector<int> ans(n);
+  for (int i = 0; i < n; i++) {
+    cin >> v[i].first;
+    v[i].second = i;
+  }
+  sort(all(v));
+  int cur = n;
+  for (int i = 0; i < n; i++) {
+    ans[v[i].second] = cur--;
+  }
+  for (int i : ans) cout << i << space;
+  cout << endl;
+}
 
 int32_t main() {
   // fast input
@@ -80,7 +96,7 @@ int32_t main() {
   fileInput();
   init();
   int t = 1;
-  //    cin >> t;
+  cin >> t;
   int tc = 1;
   while (t--) {
     elmtarshm(tc++);

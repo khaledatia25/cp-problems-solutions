@@ -39,7 +39,6 @@ using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
                               tree_order_statistics_node_update>;
 template <class T>
 using min_heap = priority_queue<T, vector<T>, greater<T>>;
-
 template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
@@ -53,7 +52,6 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
   os << '\n';
   return os;
 }
-
 using ld = long double;
 
 void fileInput(/*Hello World*/);
@@ -71,7 +69,42 @@ const ll N = 1e4 + 9;
 
 void init() {}
 
-void elmtarshm(int tc) {}
+void elmtarshm(int tc) {
+  int n;
+  cin >> n;
+  map<int, int> mp;
+  for (int i = 0; i < n; i++) {
+    int x;
+    cin >> x;
+    mp[x]++;
+  }
+  vector<int> v;
+  for (auto I : mp) {
+    v.push_back(I.second);
+  }
+  int ans = 0;
+  sort(all(v));
+  for (int st = 1; st <= v.back(); st++) {
+    set<int> s;
+    int temp = 0;
+    for (int i = st;; i += i) {
+      auto it = lower_bound(all(v), i);
+      if (it == v.end()) {
+        ans = max(ans, temp);
+        break;
+      }
+      int idx = it - v.begin();
+      while (s.count(idx)) idx++;
+      if (idx >= v.size()) {
+        ans = max(ans, temp);
+        break;
+      }
+      s.insert(idx);
+      temp += i;
+    }
+  }
+  cout << ans << endl;
+}
 
 int32_t main() {
   // fast input
@@ -80,7 +113,7 @@ int32_t main() {
   fileInput();
   init();
   int t = 1;
-  //    cin >> t;
+  //  cin >> t;
   int tc = 1;
   while (t--) {
     elmtarshm(tc++);

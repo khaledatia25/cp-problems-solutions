@@ -71,16 +71,48 @@ const ll N = 1e4 + 9;
 
 void init() {}
 
-void elmtarshm(int tc) {}
+void elmtarshm(int tc) {
+  int n;
+  cin >> n;
+  set<int> st, missing;
+  for (int i = 0; i < n; i++) {
+    int x;
+    cin >> x;
+    st.insert(x);
+  }
+  int mx = 0;
+  for (auto i : st)
+    if (i == mx) mx++;
+
+  int y = 0;
+  while (y != -1) {
+    if (y == -2) {
+      return;
+    }
+    cout << mx << endl;
+    st.insert(mx);
+    cout.flush();
+    cin >> y;
+    st.erase(y);
+    if (y <= mx)
+      mx = y;
+    else {
+      {
+        mx++;
+        while (st.count(mx) != 0) mx++;
+      }
+    }
+  }
+}
 
 int32_t main() {
   // fast input
   KHALED_WALEED_ATTIA
   // handle file input
-  fileInput();
+  // fileInput();
   init();
   int t = 1;
-  //    cin >> t;
+  cin >> t;
   int tc = 1;
   while (t--) {
     elmtarshm(tc++);

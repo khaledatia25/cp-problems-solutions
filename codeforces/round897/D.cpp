@@ -71,7 +71,30 @@ const ll N = 1e4 + 9;
 
 void init() {}
 
-void elmtarshm(int tc) {}
+void elmtarshm(int tc) {
+  int n, k;
+  cin >> n >> k;
+  vector<int> b(n);
+  cin >> b;
+  b.insert(b.begin(), 0);
+  vector<int> a(n + 1);
+
+  for (int i = 1; i <= n - k + 1; i++) {
+    vector<int> temp(k + 1);
+    pair<int, int> prev = {0, 0};
+    for (int j = 0; j < k; j++) {
+      pair<int, int> cur = {i + j, b[i + (j + 1) % k]};
+      if (prev.first && prev.second) {
+      }
+      prev = cur;
+    }
+    if (a == b) {
+      cout << "YES" << endl;
+    } else {
+      cout << "NO" << endl;
+    }
+  }
+}
 
 int32_t main() {
   // fast input
@@ -80,7 +103,7 @@ int32_t main() {
   fileInput();
   init();
   int t = 1;
-  //    cin >> t;
+  cin >> t;
   int tc = 1;
   while (t--) {
     elmtarshm(tc++);

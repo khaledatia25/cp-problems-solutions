@@ -39,7 +39,6 @@ using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
                               tree_order_statistics_node_update>;
 template <class T>
 using min_heap = priority_queue<T, vector<T>, greater<T>>;
-
 template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
@@ -53,7 +52,6 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
   os << '\n';
   return os;
 }
-
 using ld = long double;
 
 void fileInput(/*Hello World*/);
@@ -68,10 +66,43 @@ const ll mod = 1e9 + 7;
 const int sz = 1e6;
 const int K = +9;
 const ll N = 1e4 + 9;
-
+struct yaaah {
+  yaaah *arr[10];
+  bool hi;
+  yaaah() {
+    memset(arr, 0, sizeof arr);
+    hi = false;
+  }
+  bool add(string &s, bool pre = false, bool sap7 = false, int idx = 0) {
+    if (idx >= s.size()) {
+      if (hi)
+        return false;
+      else {
+        hi = true;
+        return sap7 && !pre;
+      }
+    }
+    if (arr[s[idx] - '0'] == 0) {
+      arr[s[idx] - '0'] = new yaaah();
+      return arr[s[idx] - '0']->add(s, hi || pre, true, idx + 1);
+    }
+    return arr[s[idx] - '0']->add(s, hi || pre, sap7, idx + 1);
+  }
+};
 void init() {}
 
-void elmtarshm(int tc) {}
+void elmtarshm(int tc) {
+  int n;
+  cin >> n;
+  yaaah y;
+  bool a = true;
+  while (n--) {
+    string s;
+    cin >> s;
+    a &= y.add(s);
+  }
+  cout << (a ? "YES" : "NO") << endl;
+}
 
 int32_t main() {
   // fast input
@@ -80,7 +111,7 @@ int32_t main() {
   fileInput();
   init();
   int t = 1;
-  //    cin >> t;
+  cin >> t;
   int tc = 1;
   while (t--) {
     elmtarshm(tc++);
