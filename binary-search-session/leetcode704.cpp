@@ -7,6 +7,13 @@ int search(vector<int>& nums, int target) {
   /*
     code here
   */
+  auto low = lower_bound(nums.begin(), nums.end(), target);
+  auto high = upper_bound(nums.begin(), nums.end(), target);
+  if (low == high) {
+    cout << "-1 -1";
+  } else {
+    cout << low - nums.begin() << " " << high - nums.begin() - 1 << endl;
+  }
 }
 
 void solve() {

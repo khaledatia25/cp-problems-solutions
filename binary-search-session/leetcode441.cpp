@@ -3,15 +3,10 @@
 using namespace std;
 void file_input();
 
-
-
-void solve() {
-  
-}
+void solve() {}
 
 signed main() {
-  long long t = 1;
-  file_input();
+  int t = 1;
   // cin >> t;
 
   while (t--) solve();
