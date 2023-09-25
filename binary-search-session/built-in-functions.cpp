@@ -7,14 +7,10 @@ void solve() {
   vector<int> v = {1,  3,  5,  7,  11, 13, 17, 19, 23,
                    29, 31, 37, 37, 37, 37, 41, 43, 47};
 
- 
   // binary_search(_first_iterator, _second_iterator, _val)
   // returns true if target is present in the vector, otherwise false.
   cout << binary_search(v.begin(), v.end(), 37) << endl;  // -> true
   cout << binary_search(v.begin(), v.end(), 9) << endl;   // -> false
-
-
-
 
   // lower_bound(_first_iterator, _second_iterator, _val)
   // returns an iterator of the first element greater than or equal to _val
@@ -23,13 +19,11 @@ void solve() {
   auto it1 = lower_bound(v.begin(), v.end(), 37);
   cout << *it1 << endl;
 
-  // we can get the index by subtracting v.begin()
+    // we can get the index by subtracting v.begin()
   int it1_index = it1 - v.begin();
   // lower_bound(v.begin(), v.end(), 37) - v.begin();
 
   cout << it1_index << endl;
-
-
 
   // upper_bound(_first_iterator, _second_iterator, _val)
   // returns an iterator of the first element greater than  _val
@@ -43,8 +37,6 @@ void solve() {
   // upper_bound(v.begin(), v.end(), 37) - v.begin();
 
   cout << it2_index << endl;
-
-
 
   // equal_range(_first_interator, _second_iterator, _val)
   // return a pair of iterators
@@ -61,7 +53,7 @@ void solve() {
 
 signed main() {
   int t = 1;
-
+  file_input();
   // cin >> t;
 
   while (t--) solve();

@@ -1,25 +1,34 @@
 #include <bits/stdc++.h>
-
 using namespace std;
+/*
+  Idea find first index and last index of target in the given vector
+  Solution -> find first index using lower bound
+           -> find last index using upper bound - 1
+           -> if lower bound = upper bound there is no elements in the vector
+  equal target
+
+
+*/
 void file_input();
 
 vector<int> searchRange(vector<int>& nums, int target) {
-  /*
-    code here
-  */
+  auto it1 = lower_bound(nums.begin(), nums.end(), target);
+  auto it2 = upper_bound(nums.begin(), nums.end(), target);
+
+  if (it1 == it2) {
+    return {-1, -1};
+  } else {
+    int i1 = it1 - nums.begin();
+    int i2 = it2 - nums.begin() - 1;
+    return {i1, i2};
+  }
 }
 
-void solve() {
-  vector<int> nums = {5, 7, 7, 8, 8, 10};
-  int test1 = 8, test2 = 6;
-  auto ans1 = searchRange(nums, test1);
-  cout << "Test - 1 answer is " << ans1[0] << " " << ans1[1] << endl;
-  auto ans2 = searchRange(nums, test2);
-  cout << "Test - 2 answer is " << ans2[0] << " " << ans2[1] << endl;
-}
+void solve() {}
 
 signed main() {
   int t = 1;
+  file_input();
   //   cin >> t;
 
   while (t--) solve();
