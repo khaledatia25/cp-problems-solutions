@@ -68,46 +68,13 @@ const ll mod = 1e9 + 7;
 const int sz = 1e6;
 const int K = +9;
 const ll N = 1e4 + 9;
-
+int a, b, c;
 void init() {}
 
 void elmtarshm(int tc) {
-  int n;
-  cin >> n;
-  vector<int> v(n);
-  cin >> v;
-  vector<int> xr(n, 0);
-  xr = v;
-  for (int i = 1; i < n; i++) xr[i] ^= xr[i - 1];
-  auto get = [&](int l, int r) { return l ? xr[r] ^ xr[l - 1] : xr[r]; };
-  string s;
-  cin >> s;
-  int o = 0, z = 0;
-  for (int i = 0; i < n; i++) {
-    if (s[i] == '1')
-      o ^= v[i];
-    else
-      z ^= v[i];
-  }
-  int q;
-  cin >> q;
-  while (q--) {
-    int op;
-    cin >> op;
-    if (op == 1) {
-      int l, r;
-      cin >> l >> r;
-      l--;
-      r--;
-      o ^= get(l, r);
-      z ^= get(l, r);
-    } else {
-      int t;
-      cin >> t;
-      cout << (t ? o : z) << space;
-    }
-  }
-  cout << endl;
+  cin >> a >> b >> c;
+  a = min(a, b);
+  cout<<c/a - 1<<endl;
 }
 
 int32_t main() {
