@@ -44,14 +44,14 @@ template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
 istream &operator>>(istream &is, vector<T> &v) {
-  for (auto &i : v) is >> i;
-  return is;
+    for (auto &i : v) is >> i;
+    return is;
 }
 template <class T>
 ostream &operator<<(ostream &os, const vector<T> &v) {
-  for (auto &i : v) os << i << " ";
-  os << '\n';
-  return os;
+    for (auto &i : v) os << i << " ";
+    os << '\n';
+    return os;
 }
 
 using ld = long double;
@@ -74,24 +74,24 @@ void init() {}
 void elmtarshm(int tc) {}
 
 int32_t main() {
-  // fast input
-  KHALED_WALEED_ATTIA
-  // handle file input
-  fileInput();
-  init();
-  int t = 1;
-  //    cin >> t;
-  int tc = 1;
-  while (t--) {
-    elmtarshm(tc++);
-  }
+    // fast input
+    KHALED_WALEED_ATTIA
+    // handle file input
+    fileInput();
+    init();
+    int t = 1;
+    //    cin >> t;
+    int tc = 1;
+    while (t--) {
+        elmtarshm(tc++);
+    }
 
-  return 0;
+    return 0;
 }
 
 void fileInput() {
 #ifndef ONLINE_JUDGE
-  freopen("../input.txt", "r", stdin);
-  freopen("../output.txt", "w", stdout);
+    freopen("../input.txt", "r", stdin);
+    freopen("../output.txt", "w", stdout);
 #endif
 }

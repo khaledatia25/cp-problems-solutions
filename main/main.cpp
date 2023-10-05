@@ -37,19 +37,17 @@ using ordered_map =
 template <class T, class F>
 using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
                               tree_order_statistics_node_update>;
-template <class T>
-using min_heap = priority_queue<T, vector<T>, greater<T>>;
+template <class T> using min_heap = priority_queue<T, vector<T>, greater<T>>;
 
-template <class T>
-using max_heap = priority_queue<T>;
-template <class T>
-istream &operator>>(istream &is, vector<T> &v) {
-  for (auto &i : v) is >> i;
+template <class T> using max_heap = priority_queue<T>;
+template <class T> istream &operator>>(istream &is, vector<T> &v) {
+  for (auto &i : v)
+    is >> i;
   return is;
 }
-template <class T>
-ostream &operator<<(ostream &os, const vector<T> &v) {
-  for (auto &i : v) os << i << " ";
+template <class T> ostream &operator<<(ostream &os, const vector<T> &v) {
+  for (auto &i : v)
+    os << i << " ";
   os << '\n';
   return os;
 }
@@ -68,13 +66,45 @@ const ll mod = 1e9 + 7;
 const int sz = 1e6;
 const int K = +9;
 const ll N = 1e4 + 9;
-int a, b, c;
-void init() {}
+const int LOG = 20;
+vector<int> g[N];
+int up[N][LOG];
+int depth[N];
+void dfs(int node) {
+  for (int nxt : g[node]) {
+    depth[nxt] = depth[node] + 1;
+    up[nxt][0] = node; // node is the parent of nxt
+    for (int j = 1; j < LOG; j++) {
+      up[nxt][j] = up[up[nxt][j - 1]][j - 1];
+    }
+    dfs(nxt);
+  }
+}
 
+int get_lca(int u, int v) {
+  if (depth[u] < depth[v]) {
+    swap(u, v);
+  }
+  int k = depth[u] - depth[v];
+  for (int j = LOG - 1; j >= 0; j--) {
+    if (k & (1 << j)) {
+      u = up[u][j];
+    }
+  }
+  if (u == v) {
+    return u;
+  }
+  for (int j = LOG - 1; j >= 0; j--) {
+    if (up[u][j] != up[v][j]) {
+      u = up[u][j];
+      v = up[v][j];
+    }
+  }
+  return up[u][0];
+}
+void init() {}
 void elmtarshm(int tc) {
-  cin >> a >> b >> c;
-  a = min(a, b);
-  cout<<c/a - 1<<endl;
+  
 }
 
 int32_t main() {

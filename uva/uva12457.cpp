@@ -45,8 +45,8 @@ void fileInput(/*Hello World*/);
 
 typedef complex<double> point;
 
-const int dx[] = { -1, 0, 1, 0, 1, 1, -1, -1 },
-dy[] = { 0, 1, 0, -1, 1, -1, 1, -1 };
+const int dx[] = {-1, 0, 1, 0, 1, 1, -1, -1},
+          dy[] = {0, 1, 0, -1, 1, -1, 1, -1};
 const ll mod = 1e9 + 7;
 // const ll mod = 998244353;
 // const ll mod = 998244353;
@@ -60,10 +60,10 @@ void elmtarshm(int tc) {
     int n;
     double p;
     scanf("%lld %lf", &n, &p);
-    vector<double>dp(2 * n);
+    vector<double> dp(2 * n);
     // dp[i] -> probalility of A to win i matches till now
     dp[0] = 1;
-    for (int i = 1; i <= 2 * n - 1;i++) {
+    for (int i = 1; i <= 2 * n - 1; i++) {
         for (int cnt = i; cnt >= 0; cnt--) {
             dp[cnt] = dp[cnt] * (1.0 - p);
             if (cnt)
@@ -71,7 +71,7 @@ void elmtarshm(int tc) {
         }
     }
     double ans = 0;
-    for (int i = n;i < 2 * n; i++) {
+    for (int i = n; i < 2 * n; i++) {
         ans += dp[i];
     }
     printf("%.2f\n", ans);
@@ -80,8 +80,8 @@ void elmtarshm(int tc) {
 int32_t main() {
     // fast input
     KHALED_WALEED_ATTIA
-        // handle file input
-        fileInput();
+    // handle file input
+    fileInput();
     init();
     int t = 1;
     //    cin >> t;
