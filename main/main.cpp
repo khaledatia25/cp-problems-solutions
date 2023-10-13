@@ -73,7 +73,8 @@ const ll N = 1e4 + 9;
 
 void init() {}
 void elmtarshm(int tc) {
-    
+    int n;
+    cin >> n;
 }
 
 int32_t main() {

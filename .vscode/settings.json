@@ -11,6 +11,7 @@
     "vector": "cpp",
     "any": "cpp",
     "system_error": "cpp",
-    "cmath": "cpp"
+    "cmath": "cpp",
+    "random": "cpp"
   }
 }

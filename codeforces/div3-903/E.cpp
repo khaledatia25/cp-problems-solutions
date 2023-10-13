@@ -39,21 +39,21 @@ using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
                               tree_order_statistics_node_update>;
 template <class T>
 using min_heap = priority_queue<T, vector<T>, greater<T>>;
+
 template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
 istream &operator>>(istream &is, vector<T> &v) {
-    for (auto &i : v)
-        is >> i;
+    for (auto &i : v) is >> i;
     return is;
 }
 template <class T>
 ostream &operator<<(ostream &os, const vector<T> &v) {
-    for (auto &i : v)
-        os << i << " ";
+    for (auto &i : v) os << i << " ";
     os << '\n';
     return os;
 }
+
 using ld = long double;
 
 void fileInput(/*Hello World*/);
@@ -67,33 +67,31 @@ const ll mod = 1e9 + 7;
 // const ll mod = 998244353;
 const int sz = 1e6;
 const int K = +9;
-const ll N = 1e4 + 9;
-
+const ll N = 2e5 + 9;// A7aaa
+int dp[N][2];
+int n;
+int v[N];
+int rec(int i, bool a) {
+    if (i == n) {
+        return 0;
+    }
+    int &ret = dp[i][a];
+    // try if valid
+    if (~ret) return ret;
+    int ch1 = INT_MAX;
+    if (i + v[i] + 1 <= n) {
+        ch1 = rec(i + v[i] + 1, 1);
+    }
+    int ch2 = 1 + rec(i + 1, 0);
+    return ret = min(ch1, ch2);
+}
 void init() {}
 
 void elmtarshm(int tc) {
-    int n;
     cin >> n;
-    multiset<int> available;
-    int no = -1;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        available.insert(x);
-    }
-    bool turn = 1;
-    while (!available.empty()) {
-        auto it = available.rbegin();
-        int val = *it;
-        available.erase(available.find(val));
-        if (no != -1) {
-            available.insert(no);
-        }
-        val--;
-        no = val ? val : -1;
-        turn ^= 1;
-    }
-    cout << (turn ? "HL" : "T") << endl;
+    for (int i = 0; i < n; i++) cin >> v[i], dp[i][0] = dp[i][1] = -1;
+    dp[n][0] = dp[n][1] = -1;
+    cout << rec(0, 0) << endl;
 }
 
 int32_t main() {

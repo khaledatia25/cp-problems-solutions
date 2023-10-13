@@ -39,21 +39,21 @@ using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
                               tree_order_statistics_node_update>;
 template <class T>
 using min_heap = priority_queue<T, vector<T>, greater<T>>;
+
 template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
 istream &operator>>(istream &is, vector<T> &v) {
-    for (auto &i : v)
-        is >> i;
+    for (auto &i : v) is >> i;
     return is;
 }
 template <class T>
 ostream &operator<<(ostream &os, const vector<T> &v) {
-    for (auto &i : v)
-        os << i << " ";
+    for (auto &i : v) os << i << " ";
     os << '\n';
     return os;
 }
+
 using ld = long double;
 
 void fileInput(/*Hello World*/);
@@ -74,28 +74,31 @@ void init() {}
 void elmtarshm(int tc) {
     int n;
     cin >> n;
-    multiset<int> available;
-    int no = -1;
+    vector<vector<char>> a(n, vector<char>(n)), b(n, vector<char>(n));
     for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        available.insert(x);
-    }
-    bool turn = 1;
-    while (!available.empty()) {
-        auto it = available.rbegin();
-        int val = *it;
-        available.erase(available.find(val));
-        if (no != -1) {
-            available.insert(no);
+        for (int j = 0; j < n; j++) {
+            cin >> a[i][j];
+            b[i][j] = a[i][j];
         }
-        val--;
-        no = val ? val : -1;
-        turn ^= 1;
     }
-    cout << (turn ? "HL" : "T") << endl;
-}
+    int ans = 0;
+    for (int i = 0; i < n / 2; i++) {
+        for (int j = 0; j < n / 2; j++) {
+            vector<char> temp;
+            temp.push_back(a[i][j]);
+            temp.push_back(a[j][n - i - 1]);
+            temp.push_back(a[n - 1 - i][n - j - 1]);
+            temp.push_back(a[n - j - 1][i]);
+            char c = *max_element(all(temp));
+            for (auto k : temp) ans += abs(c - k);
+            // cout << ans << endl;
+            // cout << i << space << j << endl;
+            // cout << temp;
+        }
+    }
 
+    cout << ans << endl;
+}
 int32_t main() {
     // fast input
     KHALED_WALEED_ATTIA

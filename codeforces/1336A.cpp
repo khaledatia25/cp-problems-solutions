@@ -43,14 +43,12 @@ template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
 istream &operator>>(istream &is, vector<T> &v) {
-    for (auto &i : v)
-        is >> i;
+    for (auto &i : v) is >> i;
     return is;
 }
 template <class T>
 ostream &operator<<(ostream &os, const vector<T> &v) {
-    for (auto &i : v)
-        os << i << " ";
+    for (auto &i : v) os << i << " ";
     os << '\n';
     return os;
 }
@@ -68,32 +66,38 @@ const ll mod = 1e9 + 7;
 const int sz = 1e6;
 const int K = +9;
 const ll N = 1e4 + 9;
-
+vector<int> *g;
 void init() {}
 
 void elmtarshm(int tc) {
-    int n;
-    cin >> n;
-    multiset<int> available;
-    int no = -1;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        available.insert(x);
+    int n, k;
+    cin >> n >> k;
+    g = new vector<int>[n + 1];
+    for (int i = 1; i < n; i++) {
+        int u, v;
+        cin >> u >> v;
+        g[u].push_back(v);
+        g[v].push_back(u);
     }
-    bool turn = 1;
-    while (!available.empty()) {
-        auto it = available.rbegin();
-        int val = *it;
-        available.erase(available.find(val));
-        if (no != -1) {
-            available.insert(no);
+    vector<int> cnt(n + 1);
+    vector<int> a;
+    function<void(int, int, int)> dfs = [&](int node, int par, int d) {
+        cnt[node] = 1;
+        for (int nxt : g[node]) {
+            if (nxt == par) continue;
+            dfs(nxt, node, d + 1);
+            cnt[node] += cnt[nxt];
         }
-        val--;
-        no = val ? val : -1;
-        turn ^= 1;
+        a.push_back(cnt[node] - d);
+    };
+    dfs(1, 1, 1);
+    sort(allr(a));
+    k = n - k;
+    int ans = 0;
+    for (int i = 0; i < k; i++) {
+        ans += a[i];
     }
-    cout << (turn ? "HL" : "T") << endl;
+    cout << ans << endl;
 }
 
 int32_t main() {
@@ -103,7 +107,7 @@ int32_t main() {
     fileInput();
     init();
     int t = 1;
-    cin >> t;
+    //    cin >> t;
     int tc = 1;
     while (t--) {
         elmtarshm(tc++);

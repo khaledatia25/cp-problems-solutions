@@ -39,21 +39,21 @@ using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
                               tree_order_statistics_node_update>;
 template <class T>
 using min_heap = priority_queue<T, vector<T>, greater<T>>;
+
 template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
 istream &operator>>(istream &is, vector<T> &v) {
-    for (auto &i : v)
-        is >> i;
+    for (auto &i : v) is >> i;
     return is;
 }
 template <class T>
 ostream &operator<<(ostream &os, const vector<T> &v) {
-    for (auto &i : v)
-        os << i << " ";
+    for (auto &i : v) os << i << " ";
     os << '\n';
     return os;
 }
+
 using ld = long double;
 
 void fileInput(/*Hello World*/);
@@ -72,28 +72,17 @@ const ll N = 1e4 + 9;
 void init() {}
 
 void elmtarshm(int tc) {
-    int n;
-    cin >> n;
-    multiset<int> available;
-    int no = -1;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        available.insert(x);
+    int a, b, c;
+    cin >> a >> b >> c;
+    int g = __gcd(a, __gcd(b, c));
+    int cnt = a / g ? a / g - 1 : 0;
+    cnt += b / g ? b / g - 1 : 0;
+    cnt += c / g ? c / g - 1 : 0;
+    if (cnt <= 3) {
+        cout << "YES" << endl;
+    } else {
+        cout << "NO" << endl;
     }
-    bool turn = 1;
-    while (!available.empty()) {
-        auto it = available.rbegin();
-        int val = *it;
-        available.erase(available.find(val));
-        if (no != -1) {
-            available.insert(no);
-        }
-        val--;
-        no = val ? val : -1;
-        turn ^= 1;
-    }
-    cout << (turn ? "HL" : "T") << endl;
 }
 
 int32_t main() {

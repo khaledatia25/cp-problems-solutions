@@ -43,14 +43,12 @@ template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
 istream &operator>>(istream &is, vector<T> &v) {
-    for (auto &i : v)
-        is >> i;
+    for (auto &i : v) is >> i;
     return is;
 }
 template <class T>
 ostream &operator<<(ostream &os, const vector<T> &v) {
-    for (auto &i : v)
-        os << i << " ";
+    for (auto &i : v) os << i << " ";
     os << '\n';
     return os;
 }
@@ -72,28 +70,33 @@ const ll N = 1e4 + 9;
 void init() {}
 
 void elmtarshm(int tc) {
-    int n;
-    cin >> n;
-    multiset<int> available;
-    int no = -1;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        available.insert(x);
+    string s;
+    cin >> s;
+    int n = s.size() / 2;
+    int o = n - count(all(s), '(');
+    int c = n - count(all(s), ')');
+    if (o == 0 || c == 0) {
+        cout << "YES" << endl;
+        return;
     }
-    bool turn = 1;
-    while (!available.empty()) {
-        auto it = available.rbegin();
-        int val = *it;
-        available.erase(available.find(val));
-        if (no != -1) {
-            available.insert(no);
+    int cur = 0;
+    for (int i = 0; i < 2 * n; i++) {
+        if (s[i] == '?') {
+            if (cur < o - 1 || cur == o) {
+                s[i] = '(';
+            } else {
+                s[i] = ')';
+            }
+            cur++;
         }
-        val--;
-        no = val ? val : -1;
-        turn ^= 1;
     }
-    cout << (turn ? "HL" : "T") << endl;
+    int sum = 0;
+    for (int i = 0; i < s.size(); i++) {
+        sum += s[i] == '(' ? 1 : -1;
+        if (sum < 0)
+            return cout << "YES" << endl, void();
+    }
+    cout << "NO" << endl;
 }
 
 int32_t main() {
@@ -104,7 +107,7 @@ int32_t main() {
     init();
     int t = 1;
     cin >> t;
-    int tc = 1;
+    int tc = 1; 
     while (t--) {
         elmtarshm(tc++);
     }

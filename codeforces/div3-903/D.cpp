@@ -39,21 +39,21 @@ using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
                               tree_order_statistics_node_update>;
 template <class T>
 using min_heap = priority_queue<T, vector<T>, greater<T>>;
+
 template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
 istream &operator>>(istream &is, vector<T> &v) {
-    for (auto &i : v)
-        is >> i;
+    for (auto &i : v) is >> i;
     return is;
 }
 template <class T>
 ostream &operator<<(ostream &os, const vector<T> &v) {
-    for (auto &i : v)
-        os << i << " ";
+    for (auto &i : v) os << i << " ";
     os << '\n';
     return os;
 }
+
 using ld = long double;
 
 void fileInput(/*Hello World*/);
@@ -68,32 +68,35 @@ const ll mod = 1e9 + 7;
 const int sz = 1e6;
 const int K = +9;
 const ll N = 1e4 + 9;
+ll mul;
+// Integer factorization in O(N^{1/4}
+// uses squfof from msieve https://github.com/radii/msieve
+// with fixes to work for n = p^3
+// works up to 10^18
+// probably fails on 5003^5 which is ~10^{18.5}
 
 void init() {}
 
 void elmtarshm(int tc) {
     int n;
     cin >> n;
-    multiset<int> available;
-    int no = -1;
+    mul = 1;
+    map<int, int> cnt;
+    bool a = true;
     for (int i = 0; i < n; i++) {
         int x;
         cin >> x;
-        available.insert(x);
-    }
-    bool turn = 1;
-    while (!available.empty()) {
-        auto it = available.rbegin();
-        int val = *it;
-        available.erase(available.find(val));
-        if (no != -1) {
-            available.insert(no);
+        for (int j = 2; j * j <= x; j++) {
+            while (x % j == 0) {
+                cnt[j]++;
+                x /= j;
+            }
         }
-        val--;
-        no = val ? val : -1;
-        turn ^= 1;
+        if (x != 1) cnt[x]++;
     }
-    cout << (turn ? "HL" : "T") << endl;
+    for (auto I : cnt)
+        if (I.second % n) a = false;
+    cout << (a ? "YES" : "NO") << endl;
 }
 
 int32_t main() {
