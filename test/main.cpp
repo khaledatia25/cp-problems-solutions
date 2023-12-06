@@ -61,53 +61,49 @@ int lcm(int a, int b) { return a / __gcd(a, b) * b; }
 #include "./random_generator_lib.h"
 void init() {}
 void elmtarshm(int tc) {
-  char x[] = "./tests/00000000000000.txt";
-  int idx = 8;
-  for (int i = 0; i < 30; i++) {
-    if (x[idx] == '9') idx++;
-    x[idx]++;
-    freopen(x, "w", stdout);
-    int n = random32(1, 1e5);
-    cout << n << endl;
-    for (int i = 0; i < n; i++) {
-      cout << random32(1, 1e9) << space;
+    char x[] = "./tests/00000000000000.txt";
+    int idx = 8;
+    for (int i = 0; i < 2; i++) {
+        if (x[idx] == '9') idx++;
+        x[idx]++;
+        freopen(x, "w", stdout);
+        int n = 1e5;
+        cout << n << endl;
+        for (int i = 0; i < n; i++) {
+            cout << random32(1, 1e9) << space;
+        }
+        cout << endl;
+        int u = 1e5;
+        cout << u << endl;
+        for (int i = 0; i < u; i++) {
+            cout << 1 << space << n << space << random32(1, 1e9) << endl;
+        }
+        cout << u << endl;
+        for (int i = 0; i < u; i++) {
+            cout << 1 << space << n << endl;
+        }
     }
-    cout << endl;
-    int m = random32(1, 1e5);
-    cout << m << endl;
-    for (int i = 0; i < m; i++) {
-      cout << random32(1, 1e5) << space;
-    }
-    cout << endl;
-    int q = random32(1, 1e5);
-    cout << q << endl;
-    for (int i = 0; i < q; i++) {
-      int x = random32(1, n);
-      int y = random32(1, n);
-      cout << x << space << y << endl;
-    }
-  }
 }
 
 int32_t main() {
-  // fast input
-  KHALED_WALEED_ATTIA
-  // handle file input
-  //   fileInput();
-  init();
-  int t = 1;
-  //   cin >> t;
-  int tc = 1;
-  while (t--) {
-    elmtarshm(tc++);
-  }
+    // fast input
+    KHALED_WALEED_ATTIA
+    // handle file input
+    //   fileInput();
+    init();
+    int t = 1;
+    //   cin >> t;
+    int tc = 1;
+    while (t--) {
+        elmtarshm(tc++);
+    }
 
-  return 0;
+    return 0;
 }
 
 void fileInput() {
 #ifndef ONLINE_JUDGE
-  freopen("../input.txt", "r", stdin);
-  freopen("../output.txt", "w", stdout);
+    freopen("../input.txt", "r", stdin);
+    freopen("../output.txt", "w", stdout);
 #endif
 }

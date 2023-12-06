@@ -12,6 +12,10 @@
     "any": "cpp",
     "system_error": "cpp",
     "cmath": "cpp",
-    "random": "cpp"
+    "random": "cpp",
+    "tuple": "cpp",
+    "ostream": "cpp",
+    "iosfwd": "cpp",
+    "valarray": "cpp"
   }
 }

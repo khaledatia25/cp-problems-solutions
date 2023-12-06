@@ -1,5 +1,7 @@
 /*
-    Buggy Code Written By Khaled Waleed  ^_^
+    --------------------------------------------     ==============
+    | Buggy Code Written By Khaled Waleed  ^_^ |     |   For Fun  |
+    --------------------------------------------     ==============
 */
 #include <bits/stdc++.h>
 
@@ -43,14 +45,14 @@ template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
 istream &operator>>(istream &is, vector<T> &v) {
-  for (auto &i : v) is >> i;
-  return is;
+    for (auto &i : v) is >> i;
+    return is;
 }
 template <class T>
 ostream &operator<<(ostream &os, const vector<T> &v) {
-  for (auto &i : v) os << i << " ";
-  os << '\n';
-  return os;
+    for (auto &i : v) os << i << " ";
+    os << '\n';
+    return os;
 }
 using ld = long double;
 
@@ -65,31 +67,33 @@ const ll mod = 1e9 + 7;
 // const ll mod = 998244353;
 const int sz = 1e6;
 const int K = +9;
-const ll N = 1e4 + 9;
+const ll N = 1e6 + 9;
 
-void init() {}
+void init() {
+}
 
-void elmtarshm(int tc) {}
+void freePalestine(int tc) {
+}
 
 int32_t main() {
-  // fast input
-  KHALED_WALEED_ATTIA
-  // handle file input
-  fileInput();
-  init();
-  int t = 1;
-  //    cin >> t;
-  int tc = 1;
-  while (t--) {
-    elmtarshm(tc++);
-  }
+    // fast input
+    KHALED_WALEED_ATTIA
+    // handle file input
+    fileInput();
+    init();
+    int t = 1;
+    //    cin >> t;
+    int tc = 1;
+    while (t--) {
+        freePalestine(tc++);
+    }
 
-  return 0;
+    return 0;
 }
 
 void fileInput() {
 #ifndef ONLINE_JUDGE
-  freopen("../input.txt", "r", stdin);
-  freopen("../output.txt", "w", stdout);
+    freopen("../input.txt", "r", stdin);
+    freopen("../output.txt", "w", stdout);
 #endif
 }

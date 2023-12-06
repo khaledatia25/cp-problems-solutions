@@ -1,5 +1,7 @@
 /*
-    Buggy Code Written By Khaled Waleed  ^_^
+    --------------------------------------------     ==============
+    | Buggy Code Written By Khaled Waleed  ^_^ |     |   For Fun  |
+    --------------------------------------------     ==============
 */
 #include <bits/stdc++.h>
 
@@ -39,7 +41,6 @@ using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
                               tree_order_statistics_node_update>;
 template <class T>
 using min_heap = priority_queue<T, vector<T>, greater<T>>;
-
 template <class T>
 using max_heap = priority_queue<T>;
 template <class T>
@@ -53,7 +54,6 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
     os << '\n';
     return os;
 }
-
 using ld = long double;
 
 void fileInput(/*Hello World*/);
@@ -67,11 +67,13 @@ const ll mod = 1e9 + 7;
 // const ll mod = 998244353;
 const int sz = 1e6;
 const int K = +9;
-const ll N = 1e4 + 9;
+const ll N = 1e6 + 9;
 
-void init() {}
+void init() {
+}
 
-void elmtarshm(int tc) {}
+void freePalestine(int tc) {
+}
 
 int32_t main() {
     // fast input
@@ -83,7 +85,7 @@ int32_t main() {
     //    cin >> t;
     int tc = 1;
     while (t--) {
-        elmtarshm(tc++);
+        freePalestine(tc++);
     }
 
     return 0;
