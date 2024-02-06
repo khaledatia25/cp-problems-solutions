@@ -1,101 +1,131 @@
-//#pragma GCC optimize ("O3")
-//#pragma GCC optimize ("unroll-loops") // remember usage
-#include<iostream>
+/*
+    --------------------------------------------     ==============
+    | Buggy Code Written By Khaled Waleed  ^_^ |     |   For Fun  |
+    --------------------------------------------     ==============
+*/
 #include <bits/stdc++.h>
-#include <ext/numeric>
-using namespace std;
-//using LL = __int128;
-#include<ext/pb_ds/assoc_container.hpp>
+
+#include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
+#include <iostream>
+
+#define KHALED_WALEED_ATTIA ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+#define space " "
+#define endl '\n'
+
+#define all(v) v.begin(), v.end()
+#define allr(v) v.rbegin(), v.rend()
+#define prec(n) cout << fixed << setprecision(n)
+#define countbits(n) __builtin_popcount(n)
+
+#define ll long long
+#define int long long
+#define OO (ll)1e18
+#define oo (ll)1e9
+#define angle(a) (atan2((a).imag(), (a).real()))
+
+using namespace std;
 using namespace __gnu_pbds;
-using ll = long long;
-using ull = unsigned long long;
+
+template <class T>
+using ordered_multiset = tree<T, null_type, less_equal<T>, rb_tree_tag,
+                              tree_order_statistics_node_update>;
+template <class T>
+using ordered_set =
+    tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+template <class T, class F>
+using ordered_map =
+    tree<T, map<T, F>, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+template <class T, class F>
+using ordered_multimap = tree<T, map<T, F>, less_equal<T>, rb_tree_tag,
+                              tree_order_statistics_node_update>;
+template <class T>
+using min_heap = priority_queue<T, vector<T>, greater<T>>;
+template <class T>
+using max_heap = priority_queue<T>;
+template <class T>
+istream &operator>>(istream &is, vector<T> &v) {
+    for (auto &i : v) is >> i;
+    return is;
+}
+template <class T>
+ostream &operator<<(ostream &os, const vector<T> &v) {
+    for (auto &i : v) os << i << " ";
+    os << '\n';
+    return os;
+}
 using ld = long double;
-#define nd "\n"
-#define all(x) (x).begin(), (x).end()
-#define lol cout <<"i am here"<<nd;
-#define py cout <<"YES"<<nd;
-#define pp  cout <<"ppppppppppppppppp"<<nd;
-#define pn cout <<"NO"<<nd;
-#define popcount(x)  __builtin_popcount(x)
-#define clz(n) __builtin_clz(n)//31 -x
-const  double PI = acos(-1.0);
-double EPS = 1e-9;
-const ll N = 3e5+10, LOG = 20 , inf = 1e16, SQ= 200 , mod=1e9+7, mod2 = 998244353 , P1 = 31 , P2 = 29;
-template<class container> void print(container v) { for (auto& it : v) cout << it << ' ' ;cout <<endl;}
-//template <class Type1 , class Type2>
-ll fp(ll a , ll p){ if(!p) return 1; ll v = fp(a , p/2); v*=v;return p & 1 ? v*a : v;  }
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-ll rand(ll l , ll r) { return uniform_int_distribution<ll>(l, r)(rng); }
-template <typename T> using ordered_set =  tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
-template< typename  T > using min_heap = priority_queue <T , vector <T >  , greater < T > >;
-const ll B1 = 200117 , B2 = 200201;
-#define int long long // hay brother
 
+void fileInput(/*Hello World*/);
 
-ll mul (ll a, ll b , ll m){
-    return ((a % m) *  (b % m)) % m;
-}
-ll add (ll a , ll b , ll m){
-    return (a + b + m ) % m;
-} // x ^ phi(m) is congruent to 1 mod m
-// x ^ (phi -1) is congruent to  x^ -1 mod m
-ll Fp (ll b , ll p , ll m){
-    if (!p) return 1;
-    ll v = Fp(b , p >> 1 , m);
-    v = mul(v , v , m);
-    if (p & 1) v = mul(v , b , m);
-    return v;
-}
+typedef complex<double> point;
 
-ll modInv(ll n , ll m){
-    return Fp(n , m-2 , m);
-}
+const int dx[] = {-1, 0, 1, 0, 1, 1, -1, -1},
+          dy[] = {0, 1, 0, -1, 1, -1, 1, -1};
+const ll mod = 1e9 + 7;
+// const ll mod = 998244353;
+// const ll mod = 998244353;
+const int sz = 1e6;
+const int K = +9;
+const ll N = 4e2 + 9;
 
+string minWindow(string s, string t) {
+    int m = t.length();
+    int n = s.length();
+    vector<int> cnt(128, 0);
+    int c = m, st = 0;
+    int minL = INT_MAX;
+    int minS;
+    for (char i : t) cnt[i - 'A']++;
 
-
-// E gym  , div1E tor , problem j //  div1 E , div1 D
-int dx[] {0 , 0 , -1 , 1 ,-1 , 1 , 1 , -1};
-int dy[] {-1 , 1 , 0 , 0 , -1 , 1 , -1 , 1};
-
-
-const int M = 1e7+5;
-
-
-ll INF = 1e12;
-ll sum (ll n) {return n * (n+1) >> 1;}
-ll n , m , k;
-ll work (ll md){
-    ll ans = 0;
-    for (int i = 1; i <= m ; ++i)ans+= md / i >= n ? n : md / i;
-    return ans;
-}
-
-void main_(int tc){
-     cin >> n >> m >> k; if (m > n) swap(n , m);
-
-    ll L = 1 , R = n * m;
-    ll ans = -1;
-    while (L <= R){
-        ll md = (L + R) >> 1;
-        ll cue = work(md);
-        if (cue >= k) R = (ans = md) -1;
-        else L = md +1;
+    for (int end = 0; end < n; end++) {
+        cnt[s[end] - 'A']--;
+        if (cnt[s[end] - 'A'] >= 0) c--;
+        while (c == 0) {
+            if (end - st + 1 < minL) {
+                minL = end - st + 1;
+                minS = st;
+            }
+            cnt[s[st] - 'A']++;
+            if (cnt[s[st] - 'A'] > 0) c++;
+            st++;
+        }
     }
-    cout << ans <<" "<< work(ans) - work(ans-1)<< endl;
-
-
+    return minL == INT_MAX ? "" : s.substr(minS, minL);
 }
 
-signed main() {
-    ios_base::sync_with_stdio(0);cin.tie(0); cout.tie(0);
+void init() {
+}
 
-    //freopen("trains.in", "r", stdin);
-    //freopen("output.txt", "w", stdout);
-    int tt = 1, tc = 0; cin >> tt;
-    while (tt--) main_(++tc);
-    #ifndef ONLINE_JUDGE
-    cout << "Running Time: " << 1.0 * clock() / CLOCKS_PER_SEC << " s .\n";
-    #endif
+void freePalestine(int tc) {
+    string a, b;
+    cin >> a >> b;
+    cout << "hello" << endl;
+    cout << minWindow(a, b) << endl;
+}
+/*
+e -> b or d
+o -> a or d
+*/
+int32_t main() {
+    // fast input
+    KHALED_WALEED_ATTIA
+    // handle file input
+    fileInput();
+    init();
+    int t = 1;
+    // cin >> t;
+    int tc = 1;
+    while (t--) {
+        freePalestine(tc++);
+    }
+
     return 0;
+}
+
+void fileInput() {
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
 }
