@@ -1,4 +1,8 @@
-**/test
+/**/test/s
 
-
-**/*.txt
+/**/*.txt
+/**/*.in
+/**/*.in
+/**/*.out
+/**/*.exe
+/**/Competitive-Programming-Stress-Testing-master/
