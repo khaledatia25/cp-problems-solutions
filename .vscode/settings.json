@@ -1,21 +1,9 @@
 {
-  "files.associations": {
-    "iostream": "cpp",
-    "*.tcc": "cpp",
-    "deque": "cpp",
-    "forward_list": "cpp",
-    "list": "cpp",
-    "string": "cpp",
-    "unordered_map": "cpp",
-    "unordered_set": "cpp",
-    "vector": "cpp",
-    "any": "cpp",
-    "system_error": "cpp",
-    "cmath": "cpp",
-    "random": "cpp",
-    "tuple": "cpp",
-    "ostream": "cpp",
-    "iosfwd": "cpp",
-    "valarray": "cpp"
-  }
+    "files.associations": {
+        "*.tcc": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "string_view": "cpp"
+    }
 }
