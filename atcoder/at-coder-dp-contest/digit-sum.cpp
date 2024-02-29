@@ -53,42 +53,72 @@ const ll mod = 1e9 + 7;
 const int sz = 1e6;
 const int K = +9;
 const ll N = 1e4 + 9;
-
+bool is_prime(int n) {
+    if (n < 2) return false;
+    for (int i = 3; i * i <= n; i++) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
 void init() {}
-
-void elmtarshm(int tc) {
-    int k;
-    string s;
-    cin >> s >> k;
-    int len = s.size();
-    vector<vector<vector<int>>> dp(2, vector<vector<int>>(k + 1, vector<int>(3)));
-    // dp[rem][smaller] number of ways to make a number of with digits sum reminder equal to rem till now
+int sol(int num) {
+    int dp[61][61][2];
+    memset(dp, 0, sizeof dp);
+    bitset<61> n(num);
+    // dp[i][j][can] number of of good binary representations that can at index i and with j ones till now and we can take ones
     dp[0][0][0] = 1;
-    int idx = 0;
-    for (int i = 0; i < len; i++) {
-        dp[idx ^ 1].assign(k + 1, vector<int>(2, 0));
-        for (int rem = 0; rem < k; rem++) {
-            for (int smaller : {0, 1}) {
-                for (int digit = 0; digit < 10; digit++) {
-                    if (digit > s[i] - '0' && !smaller) {
-                        break;
+    dp[0][0][1] = 1;
+    for (int idx = 0; idx <= 60; idx++) {
+        for (int can : {0, 1}) {
+            for (int j = 0; j < idx; j++) {
+                if (can) {
+                    for (int digit : {0, 1}) {
+                        dp[idx][1][j] += dp[idx + 1][digit][j - digit];
                     }
-                    int& ch = dp[idx ^ 1][(rem + digit) % k][smaller || (digit < s[i] - '0')];
-                    ch = (ch % mod + dp[idx][rem][smaller] % mod) % mod;
+                } else {
+                    dp[idx][0][j] += dp[idx + 1][0][j];
                 }
             }
         }
-        idx ^= 1;
     }
-    int ans = (dp[idx][0][0] % mod + dp[idx][0][1] % mod) % mod;
-    ans = (ans - 1 + mod) % mod;
-    cout << ans << endl;
+}
+
+void elmtarshm(int tc) {
+    int num;
+    cin >> num;
+    cout << sol(num);
+    // int k;
+    // string s;
+    // cin >> s >> k;
+    // int len = s.size();
+    // vector<vector<vector<int>>> dp(2, vector<vector<int>>(k + 1, vector<int>(3)));
+    // // dp[rem][smaller] number of ways to make a number of with digits sum reminder equal to rem till now
+    // dp[0][0][0] = 1;
+    // int idx = 0;
+    // for (int i = 0; i < len; i++) {
+    //     dp[idx ^ 1].assign(k + 1, vector<int>(2, 0));
+    //     for (int rem = 0; rem < k; rem++) {
+    //         for (int smaller : {0, 1}) {
+    //             for (int digit = 0; digit < 10; digit++) {
+    //                 if (digit > s[i] - '0' && !smaller) {
+    //                     break;
+    //                 }
+    //                 int& ch = dp[idx ^ 1][(rem + digit) % k][smaller || (digit < s[i] - '0')];
+    //                 ch = (ch % mod + dp[idx][rem][smaller] % mod) % mod;
+    //             }
+    //         }
+    //     }
+    //     idx ^= 1;
+    // }
+    // int ans = (dp[idx][0][0] % mod + dp[idx][0][1] % mod) % mod;
+    // ans = (ans - 1 + mod) % mod;
+    // cout << ans << endl;
 }
 int32_t main() {
     // fast input
     KHALED_WALEED_ATTIA
     // handle file input
-    fileInput();
+    // fileInput();
     init();
     int t = 1;
     //    cin >> t;
